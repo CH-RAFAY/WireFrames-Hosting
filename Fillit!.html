@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependent Dropdown Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #ff7f00;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="car-review-form">
+        <div class="form-group">
+            <label for="brand">What brand is your car?</label>
+            <select id="brand">
+                <option value="">Select brand</option>
+                <option value="Smart">Smart</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Ford">Ford</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="model">Which model?</label>
+            <select id="model" disabled>
+                <option value="">Select model</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="year">In which year was it registered?</label>
+            <select id="year" disabled>
+                <option value="">Select first registration</option>
+            </select>
+        </div>
+        <button type="submit" class="submit-btn" disabled>View review now</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('brand').addEventListener('change', function() {
+        var brand = this.value;
+        var modelSelect = document.getElementById('model');
+        var yearSelect = document.getElementById('year');
+        var submitButton = document.querySelector('.submit-btn');
+
+        if (brand) {
+            modelSelect.removeAttribute('disabled');
+            // Clear existing options
+            modelSelect.innerHTML = '<option value="">Select model</option>';
+            if (brand === 'Smart') {
+                modelSelect.innerHTML += '<option value="Fortwo">Fortwo</option>';
+                modelSelect.innerHTML += '<option value="Forfour">Forfour</option>';
+            } else if (brand === 'Toyota') {
+                modelSelect.innerHTML += '<option value="Corolla">Corolla</option>';
+                modelSelect.innerHTML += '<option value="Camry">Camry</option>';
+            } else if (brand === 'Ford') {
+                modelSelect.innerHTML += '<option value="Focus">Focus</option>';
+                modelSelect.innerHTML += '<option value="Fiesta">Fiesta</option>';
+            }
+        } else {
+            modelSelect.setAttribute('disabled', 'true');
+            yearSelect.setAttribute('disabled', 'true');
+            submitButton.setAttribute('disabled', 'true');
+        }
+    });
+
+    document.getElementById('model').addEventListener('change', function() {
+        var model = this.value;
+        var yearSelect = document.getElementById('year');
+        var submitButton = document.querySelector('.submit-btn');
+
+        if (model) {
+            yearSelect.removeAttribute('disabled');
+            // Clear existing options
+            yearSelect.innerHTML = '<option value="">Select first registration</option>';
+            for (var year = 2000; year <= 2024; year++) {
+                yearSelect.innerHTML += '<option value="' + year + '">' + year + '</option>';
+            }
+        } else {
+            yearSelect.setAttribute('disabled', 'true');
+            submitButton.setAttribute('disabled', 'true');
+        }
+    });
+
+    document.getElementById('year').addEventListener('change', function() {
+        var year = this.value;
+        var submitButton = document.querySelector('.submit-btn');
+
+        if (year) {
+            submitButton.removeAttribute('disabled');
+        } else {
+            submitButton.setAttribute('disabled', 'true');
+        }
+    });
+</script>
+
+</body>
+</html>
