@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependent Dropdown Form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="form-container">
+        <label for="brand">What brand is your car?</label>
+        <select id="brand" name="brand">
+            <option value="" disabled selected>Select brand</option>
+            <option value="smart">Smart</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <label for="model">Which model?</label>
+        <select id="model" name="model" disabled>
+            <option value="" disabled selected>Select model</option>
+            <!-- Options will be populated by JavaScript -->
+        </select>
+
+        <label for="year">In which year was it registered?</label>
+        <select id="year" name="year" disabled>
+            <option value="" disabled selected>Select first registration</option>
+            <!-- Options will be populated by JavaScript -->
+        </select>
+
+        <button id="viewReview" disabled>View review now</button>
+    </div>
+
+    <script src="form.js"></script>
+</body>
+</html>
