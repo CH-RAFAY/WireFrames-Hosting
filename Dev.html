@@ -6,11 +6,11 @@
     <title>Dependent Dropdown Form</title>
     <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-container {
-    max-width: 400px;
+    max-width: 500px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -23,16 +23,19 @@ body {
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .form-group select,
 .form-group input {
     width: calc(100% - 10px);
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 5px;
+    font-size: 15px;
 }
 
 .form-group input.hidden {
@@ -42,20 +45,22 @@ body {
 .form-group select:focus,
 .form-group select.selected,
 .form-group input:focus {
-    border: 2px solid green;
+    border: 2.5px solid green;
 }
 
 .option-box {
     display: inline-block;
-    padding: 10px;
+    padding: 15px 30px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 5px;
     cursor: pointer;
 }
 
 .option-box.selected {
-    border: 2px solid green;
+    border: 2.5px solid green;
+    color: green;
+    font-weight: 600;
 }
 
 .hidden {
