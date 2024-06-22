@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dependent Dropdown Form</title>
     <style>
@@ -282,6 +283,13 @@ body {
 
         <button type="submit" class="submit-btn" disabled>View review now</button>
     </form>
+
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('GmW6ybmYBDQqz7hfI');
+        })();
+    </script>
+
 </div>
 
 <script>
@@ -419,7 +427,7 @@ document.getElementById('brand').addEventListener('change', function() {
         modelSelect.innerHTML = '<option value="">Select model</option>';
 
         // Dynamically populate models based on selected brand
-        carModels[brand].forEach(function(model) {
+        carModels[brand]?.forEach(function(model) {
             modelSelect.innerHTML += `<option value="${model}">${model}</option>`;
         });
         modelSelect.innerHTML += '<option value="Other">Other</option>';
@@ -442,13 +450,14 @@ document.getElementById('model').addEventListener('change', function() {
         this.classList.add('selected');
         if (model === 'Other') {
             modelOther.classList.remove('hidden');
+            yearSelect.setAttribute('disabled', 'true');
         } else {
             modelOther.classList.add('hidden');
             yearSelect.removeAttribute('disabled');
             yearSelect.innerHTML = '<option value="">Select first registration</option>';
 
             // Dynamically populate years based on selected brand
-            carYears[brand].forEach(function(year) {
+            carYears[brand]?.forEach(function(year) {
                 yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
             });
             yearSelect.innerHTML += '<option value="Other">Other</option>';
@@ -528,6 +537,39 @@ document.getElementById('mileage').addEventListener('input', function() {
         uploadImageGroup.classList.add('hidden');
         submitButton.setAttribute('disabled', 'true');
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('car-review-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const data = {
+            brand: document.getElementById('brand').value,
+            brand_other: document.getElementById('brand-other').value,
+            model: document.getElementById('model').value !== 'Other' ? document.getElementById('model').value : document.getElementById('model-other').value,
+            year: document.getElementById('year').value !== 'Other' ? document.getElementById('year').value : document.getElementById('year-other').value,
+            shape: document.querySelector('#shape-group .option-box.selected')?.getAttribute('data-value') !== 'Other' ? document.querySelector('#shape-group .option-box.selected')?.getAttribute('data-value') : document.getElementById('shape-other').value,
+            fuel: document.querySelector('#fuel-group .option-box.selected')?.getAttribute('data-value') !== 'Other' ? document.querySelector('#fuel-group .option-box.selected')?.getAttribute('data-value') : document.getElementById('fuel-other').value,
+            variant: document.querySelector('#variant-group .option-box.selected')?.getAttribute('data-value') !== 'Other' ? document.querySelector('#variant-group .option-box.selected')?.getAttribute('data-value') : document.getElementById('variant-other').value,
+            horsepower: document.querySelector('#horsepower-group .option-box.selected')?.getAttribute('data-value') !== 'Other' ? document.querySelector('#horsepower-group .option-box.selected')?.getAttribute('data-value') : document.getElementById('horsepower-other').value,
+            transmission: document.querySelector('#transmission-group .option-box.selected')?.getAttribute('data-value') !== 'Other' ? document.querySelector('#transmission-group .option-box.selected')?.getAttribute('data-value') : document.getElementById('transmission-other').value,
+            doors: document.querySelector('#doors-group .option-box.selected')?.getAttribute('data-value') !== 'Other' ? document.querySelector('#doors-group .option-box.selected')?.getAttribute('data-value') : document.getElementById('doors-other').value,
+            mileage: document.getElementById('mileage').value,
+            sell_plan: document.getElementById('sell-plan').value,
+            prefer_to_sell: document.getElementById('prefer-to-sell').value,
+            email: document.getElementById('email').value
+        };
+
+        emailjs.send('service_lltcwlr', 'template_916aebj', data)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Your review has been submitted successfully.');
+            }, function(error) {
+                console.log('FAILED...', error);
+                alert('Failed to send your review. Please try again.');
+            });
+    });
 });
 
 </script>
