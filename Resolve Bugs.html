@@ -18,6 +18,20 @@ body {
     border-radius: 5px;
 }
 
+#mileage, #email
+{
+    width: calc(97.5% - 20px);
+    padding: 10px;
+    border: 2.5px solid #949494;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 15px;
+    margin-top: 15px;
+
+}
+
+
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -29,8 +43,18 @@ body {
     font-size: 17px;
 }
 
-.form-group select,
 .form-group input {
+    width: auto;
+    padding: 10px;
+    border: 2.5px solid #949494;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.form-group select
+{
     width: calc(100% - 10px);
     padding: 10px;
     border: 1px solid #ccc;
@@ -38,6 +62,9 @@ body {
     margin-right: 5px;
     font-size: 15px;
 }
+
+
+
 
 .form-group input.hidden {
     display: none;
@@ -49,9 +76,11 @@ body {
     border: 2.5px solid green;
 }
 
+
+
 .option-box {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 15px 40px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 5px;
@@ -197,7 +226,6 @@ body {
         <div class="form-group hidden" id="shape-group">
             <label for="shape">What shape does it have?</label>
             <div class="option-box" data-value="Roadster">Roadster</div>
-            <div class="option-box" data-value="Coupe">Coupe</div>
             <div class="option-box" data-value="SUV">SUV</div>
             <div class="option-box" data-value="Other">Other</div>
             <input type="text" id="shape-other" class="hidden" placeholder="Enter shape">
@@ -206,9 +234,8 @@ body {
         <div class="form-group hidden" id="fuel-group">
             <label for="fuel">What fuel does it use?</label>
             <div class="option-box" data-value="Petrol">Petrol</div>
-            <div class="option-box" data-value="Diesel">Diesel</div>
             <div class="option-box" data-value="Electric">Electric</div>
-            <div class="option-box" data-value="Hybrid">Hybrid</div>
+            <!--<div class="option-box" data-value="Hybrid">Hybrid</div>-->
             <div class="option-box" data-value="Other">Other</div>
             <input type="text" id="fuel-other" class="hidden" placeholder="Enter fuel type">
         </div>
@@ -223,10 +250,8 @@ body {
 
         <div class="form-group hidden" id="horsepower-group">
             <label for="horsepower">How many horsepower does it have?</label>
-            <div class="option-box" data-value="85 kW / 115 hp">85 kW / 115 hp</div>
-            <div class="option-box" data-value="55 kW">55 kW</div>
-            <div class="option-box" data-value="57 kW">57 kW</div>
-            <div class="option-box" data-value="61 kW">61 kW</div>
+            <div class="option-box" data-value="147 kW ">147 kW </div>
+            <div class="option-box" data-value="294 kW ">294 kW </div>
             <div class="option-box" data-value="Other">Other</div>
             <input type="text" id="horsepower-other" class="hidden" placeholder="Enter horsepower">
         </div>
@@ -293,14 +318,17 @@ body {
 </div>
 
 <script>
-  const carMakes = [
-    'Abarth', 'Alfa Romeo', 'Alpina', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Bugatti',
-    'Buick', 'Cadillac', 'Chevrolet', 'Chrysler', 'Citroën', 'Dacia', 'Dodge', 'Ferrari',
-    'Fiat', 'Ford', 'GMC', 'Honda', 'Hyundai', 'Jaguar', 'Jeep', 'Kia', 'Lamborghini',
-    'Lancia', 'Land Rover', 'Lexus', 'Maserati', 'Mazda', 'McLaren', 'Mercedes-Benz',
-    'Mini', 'Mitsubishi', 'Nissan', 'Opel', 'Pagani', 'Peugeot', 'Porsche', 'RAM',
-    'Renault', 'Rolls-Royce', 'Saab', 'Seat', 'Skoda', 'Smart', 'Subaru', 'Suzuki', 'Tesla',
-    'Toyota', 'Volkswagen', 'Volvo', 'Other'
+const carMakes = [
+    'Abarth', 'Alfa Romeo', 'Alpina', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Chevrolet',
+    'Cadillac', 'Caterham', 'Chrysler', 'Citroën', 'Corvette', 'VITAL NI', 'Smart', 'Seat Leon',
+    'Renault', 'Daewoo', 'Daihatsu', 'Dodge', 'DS Automobiles', 'Ferrari', 'Fiat', 'Ford', 'Honda',
+    'Hyundai', 'INEOS', 'Infiniti', 'Isuzu', 'Iveco', 'Jaguar', 'Jeep', 'Kia', 'Lada', 'Lamborghini',
+    'Lancia', 'Land Rover', 'Lexus', 'Lotus', 'Lucid', 'Lynk & Co', 'Mahindra', 'ONE', 'Maserati',
+    'MAXUS', 'Mazda', 'Mercedes-Benz', 'MG', 'MG Rover', 'MINI', 'Mitsubishi', 'NIO', 'Nissan', 
+    'Opel', 'Peugeot', 'Piaggio (Vespa)', 'Polestar', 'Pontiac', 'Porsche', 'Proton', 'Renault',
+    'Rover', 'Saab', 'Seat', 'Skoda', 'Smart', 'Ssangyong', 'Subaru', 'Suzuki', 'Tata', 'Tesla',
+    'Toyota', 'Trabant', 'Triumph', 'VinFast', 'Volkswagen', 'Volvo', 'Wartburg', 'Westfield 1 von 3',
+    'Zastava Anzahl Sc'
 ];
 
 const carModels = {
@@ -356,6 +384,9 @@ const carModels = {
     'Toyota': ['Camry', 'Corolla', 'Highlander', 'RAV4', 'Tacoma'],
     'Volkswagen': ['Golf', 'Passat', 'Polo', 'Tiguan', 'Touareg'],
     'Volvo': ['XC40', 'XC60', 'XC90', 'S60', 'V60', 'V90'],
+    'Wartburg': ['311', '353', '1.3'],
+    'Westfield': ['Seven', 'XTR2', 'Sport 250'],
+    'Zastava': ['Yugo', 'Skala', 'Florida'],
     'Other': ['Other']
 };
 
@@ -412,7 +443,11 @@ const carYears = {
     'Toyota': [2015, 2016, 2017, 2018, 2019, 2020, 2021],
     'Volkswagen': [2015, 2016, 2017, 2018, 2019, 2020, 2021],
     'Volvo': [2015, 2016, 2017, 2018, 2019, 2020, 2021],
-    'Other': [2015, 2016, 2017, 2018, 2019, 2020, 2021]
+    'Wartburg': [1956, 1966, 1988],
+    'Westfield': [1982, 2000, 2015],
+    'Zastava': [1980, 1971, 1988],
+
+    'Other': ['Other']
 };
 
 document.getElementById('brand').addEventListener('change', function() {
