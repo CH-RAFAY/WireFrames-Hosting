@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependent Dropdown Form</title>
+    <style>
+        body {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-size: 15px;
+        }
+
+        .form-group input.hidden {
+            display: none;
+        }
+
+        .form-group select:focus,
+        .form-group select.selected,
+        .form-group input:focus {
+            border: 2.5px solid green;
+        }
+
+        .option-box {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .option-box.selected {
+            border: 2.5px solid green;
+            color: green;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #ff7f00;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="car-review-form">
+        <div class="form-group">
+            <label for="brand">What brand is your car?</label>
+            <select id="brand">
+                <option value="">Select brand</option>
+                <!-- Add car brands here -->
+            </select>
+            <input type="text" id="brand-other" class="hidden" placeholder="Enter brand">
+        </div>
+        <div class="form-group">
+            <label for="model">Which model?</label>
+            <select id="model" disabled>
+                <option value="">Select model</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" id="model-other" class="hidden" placeholder="Enter model">
+        </div>
+        <div class="form-group">
+            <label for="year">In which year was it registered?</label>
+            <select id="year" disabled>
+                <option value="">Select first registration</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" id="year-other" class="hidden" placeholder="Enter year">
+        </div>
+
+        <div class="form-group hidden" id="shape-group">
+            <label for="shape">What shape does it have?</label>
+            <div class="option-box" data-value="Roadster">Roadster</div>
+            <div class="option-box" data-value="Coupe">Coupe</div>
+            <div class="option-box" data-value="SUV">SUV</div>
+            <div class="option-box" data-value="Other">Other</div>
+            <input type="text" id="shape-other" class="hidden" placeholder="Enter shape">
+        </div>
+
+        <div class="form-group hidden" id="fuel-group">
+            <label for="fuel">What fuel does it use?</label>
+            <div class="option-box" data-value="Petrol">Petrol</div>
+            <div class="option-box" data-value="Diesel">Diesel</div>
+            <div class="option-box" data-value="Electric">Electric</div>
+            <div class="option-box" data-value="Hybrid">Hybrid</div>
+            <div class="option-box" data-value="Other">Other</div>
+            <input type="text" id="fuel-other" class="hidden" placeholder="Enter fuel type">
+        </div>
+
+        <div class="form-group hidden" id="variant-group">
+            <label for="variant">Which model variant is it?</label>
+            <div class="option-box" data-value="1.6">1.6 L</div>
+            <div class="option-box" data-value="1.8">1.8 L</div>
+            <div class="option-box" data-value="Other">Other</div>
+            <input type="text" id="variant-other" class="hidden" placeholder="Enter model variant">
+        </div>
+
+        <div class="form-group hidden" id="horsepower-group">
+            <label for="horsepower">How many horsepower does it have?</label>
+            <div class="option-box" data-value="85 kW / 115 hp">85 kW / 115 hp</div>
+            <div class="option-box" data-value="55 kW">55 kW</div>
+            <div class="option-box" data-value="57 kW">57 kW</div>
+            <div class="option-box" data-value="61 kW">61 kW</div>
+            <div class="option-box" data-value="Other">Other</div>
+            <input type="text" id="horsepower-other" class="hidden" placeholder="Enter horsepower">
+        </div>
+
+        <div class="form-group hidden" id="transmission-group">
+            <label for="transmission">What transmission does it have?</label>
+            <div class="option-box" data-value="Automatic">Automatic</div>
+            <div class="option-box" data-value="Manual">Manual</div>
+            <div class="option-box" data-value="Other">Other</div>
+            <input type="text" id="transmission-other" class="hidden" placeholder="Enter transmission type">
+        </div>
+
+        <div class="form-group hidden" id="doors-group">
+            <label for="doors">How many doors does it have?</label>
+            <div class="option-box" data-value="2 doors">2 doors</div>
+            <div class="option-box" data-value="4 doors">4 doors</div>
+            <div class="option-box" data-value="Other">Other</div>
+            <input type="text" id="doors-other" class="hidden" placeholder="Enter number of doors">
+        </div>
+
+        <div class="form-group hidden" id="mileage-group">
+            <label for="mileage">What is the mileage?</label>
+            <input type="text" id="mileage" placeholder="Enter mileage">
+        </div>
+        
+        <div class="form-group hidden" id="additional-options-group">
+            <div class="form-group">
+                <label for="sell-plan">When do you plan to sell?</label>
+                <select id="sell-plan">
+                    <option value="">Select timeframe</option>
+                    <option value="next-4-weeks">Over the next 4 weeks</option>
+                    <option value="next-3-months">Over the next 3 months</option>
+                    <option value="next-6-months">Over the next 6 months</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="prefer-to-sell">Who do you prefer to sell to?</label>
+                <select id="prefer-to-sell">
+                    <option value="">Select option</option>
+                    <option value="private">To Private</option>
+                    <option value="dealer">To Dealer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Where can we send the sales offer?</label>
+                <input type="email" id="email" placeholder="Please enter email address">
+            </div>
+        </div>
+
+        <div class="form-group hidden" id="upload-image-group">
+            <label for="car-image">Upload an image of your car</label>
+            <input type="file" id="car-image" accept="image/*">
+        </div>
+
+        <button type="submit" class="submit-btn" disabled>View review now</button>
+    </form>
+</div>
+
+<script>
+  const carMakes = [
+    'Abarth', 'Alfa Romeo', 'Alpina', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Bugatti',
+    'Buick', 'Cadillac', 'Chevrolet', 'Chrysler', 'Citroën', 'Dacia', 'Dodge', 'Ferrari',
+    'Fiat', 'Ford', 'GMC', 'Honda', 'Hyundai', 'Infiniti', 'Jaguar', 'Jeep', 'Kia', 'Koenigsegg',
+    'Lamborghini', 'Lancia', 'Land Rover', 'Lexus', 'Lincoln', 'Maserati', 'Mazda', 'McLaren',
+    'Mercedes-Benz', 'Mini', 'Mitsubishi', 'Nissan', 'Opel', 'Pagani', 'Peugeot', 'Porsche',
+    'Ram', 'Renault', 'Rolls-Royce', 'Saab', 'Seat', 'Skoda', 'Smart', 'Subaru', 'Suzuki',
+    'Tesla', 'Toyota', 'Volkswagen', 'Volvo', 'Other'
+  ];
+
+  const carModels = {
+    'Audi': ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'Q2', 'Q3', 'Q5', 'Q7', 'Q8', 'TT', 'Other'],
+    'BMW': ['1 Series', '2 Series', '3 Series', '4 Series', '5 Series', '6 Series', '7 Series', '8 Series', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'Z4', 'Other'],
+    // Add more brands and models as needed
+  };
+
+  const brandSelect = document.getElementById('brand');
+  const modelSelect = document.getElementById('model');
+  const yearSelect = document.getElementById('year');
+  const brandOtherInput = document.getElementById('brand-other');
+  const modelOtherInput = document.getElementById('model-other');
+  const yearOtherInput = document.getElementById('year-other');
+  const shapeGroup = document.getElementById('shape-group');
+  const fuelGroup = document.getElementById('fuel-group');
+  const variantGroup = document.getElementById('variant-group');
+  const horsepowerGroup = document.getElementById('horsepower-group');
+  const transmissionGroup = document.getElementById('transmission-group');
+  const doorsGroup = document.getElementById('doors-group');
+  const mileageGroup = document.getElementById('mileage-group');
+  const additionalOptionsGroup = document.getElementById('additional-options-group');
+  const uploadImageGroup = document.getElementById('upload-image-group');
+  const submitBtn = document.querySelector('.submit-btn');
+
+  carMakes.forEach(make => {
+    const option = document.createElement('option');
+    option.value = make;
+    option.textContent = make;
+    brandSelect.appendChild(option);
+  });
+
+  brandSelect.addEventListener('change', (event) => {
+    const selectedBrand = event.target.value;
+    if (selectedBrand === 'Other') {
+      brandOtherInput.classList.remove('hidden');
+    } else {
+      brandOtherInput.classList.add('hidden');
+    }
+
+    if (carModels[selectedBrand]) {
+      modelSelect.innerHTML = '<option value="">Select model</option>';
+      carModels[selectedBrand].forEach(model => {
+        const option = document.createElement('option');
+        option.value = model;
+        option.textContent = model;
+        modelSelect.appendChild(option);
+      });
+      modelSelect.disabled = false;
+    } else {
+      modelSelect.innerHTML = '<option value="">Select model</option>';
+      modelSelect.disabled = true;
+    }
+  });
+
+  modelSelect.addEventListener('change', (event) => {
+    const selectedModel = event.target.value;
+    if (selectedModel === 'Other') {
+      modelOtherInput.classList.remove('hidden');
+    } else {
+      modelOtherInput.classList.add('hidden');
+    }
+
+    if (selectedModel) {
+      yearSelect.disabled = false;
+    } else {
+      yearSelect.disabled = true;
+    }
+  });
+
+  yearSelect.addEventListener('change', (event) => {
+    const selectedYear = event.target.value;
+    if (selectedYear === 'Other') {
+      yearOtherInput.classList.remove('hidden');
+    } else {
+      yearOtherInput.classList.add('hidden');
+    }
+
+    if (selectedYear) {
+      shapeGroup.classList.remove('hidden');
+    }
+  });
+
+  const optionGroups = [shapeGroup, fuelGroup, variantGroup, horsepowerGroup, transmissionGroup, doorsGroup, mileageGroup];
+  optionGroups.forEach(group => {
+    group.addEventListener('click', (event) => {
+      if (event.target.classList.contains('option-box')) {
+        const selectedOption = event.target;
+        selectedOption.classList.add('selected');
+        const input = group.querySelector('input');
+        if (selectedOption.dataset.value === 'Other') {
+          input.classList.remove('hidden');
+        } else {
+          input.classList.add('hidden');
+          input.value = '';
+        }
+        const nextGroup = optionGroups[optionGroups.indexOf(group) + 1];
+        if (nextGroup) {
+          nextGroup.classList.remove('hidden');
+        } else {
+          additionalOptionsGroup.classList.remove('hidden');
+          uploadImageGroup.classList.remove('hidden');
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  });
+
+  document.getElementById('car-review-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const brand = brandSelect.value === 'Other' ? brandOtherInput.value : brandSelect.value;
+    const model = modelSelect.value === 'Other' ? modelOtherInput.value : modelSelect.value;
+    const year = yearSelect.value === 'Other' ? yearOtherInput.value : yearSelect.value;
+    const shape = Array.from(shapeGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value === 'Other' ? document.getElementById('shape-other').value : Array.from(shapeGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value;
+    const fuel = Array.from(fuelGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value === 'Other' ? document.getElementById('fuel-other').value : Array.from(fuelGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value;
+    const variant = Array.from(variantGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value === 'Other' ? document.getElementById('variant-other').value : Array.from(variantGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value;
+    const horsepower = Array.from(horsepowerGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value === 'Other' ? document.getElementById('horsepower-other').value : Array.from(horsepowerGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value;
+    const transmission = Array.from(transmissionGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value === 'Other' ? document.getElementById('transmission-other').value : Array.from(transmissionGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value;
+    const doors = Array.from(doorsGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value === 'Other' ? document.getElementById('doors-other').value : Array.from(doorsGroup.querySelectorAll('.option-box')).find(box => box.classList.contains('selected')).dataset.value;
+    const mileage = document.getElementById('mileage').value;
+    const sellPlan = document.getElementById('sell-plan').value;
+    const preferToSell = document.getElementById('prefer-to-sell').value;
+    const email = document.getElementById('email').value;
+
+    const formData = {
+      brand,
+      model,
+      year,
+      shape,
+      fuel,
+      variant,
+      horsepower,
+      transmission,
+      doors,
+      mileage,
+      sellPlan,
+      preferToSell,
+      email
+    };
+
+    // EmailJS integration
+    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData) // Replace with your EmailJS service ID and template ID
+      .then((response) => {
+        alert("Form submitted successfully!");
+      }, (error) => {
+        alert("Failed to submit form. Please try again.");
+      });
+  });
+</script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</body>
+</html>
