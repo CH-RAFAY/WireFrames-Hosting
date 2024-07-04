@@ -1,0 +1,29 @@
+body{
+    padding: 5px;
+    margin: 5px;
+    background-color: rgb(255, 255, 255);
+}
+
+img{
+    width: 80%;
+    border-radius: 20px;
+}
+
+.hdgs {
+    padding: 5px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    background-image: linear-gradient(to right, #531c1c, #252424);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    box-shadow: 0px 0px 10px 3px rgba(255,255,255,0.5);
+    transition: box-shadow 0.3s ease;
+    width: 80%;
+}
+
+.hdgs:hover {
+    background-image: linear-gradient(to right, #252424, #531c1c);  
+ 
+    box-shadow: 0px 0px 20px 6px rgba(57, 57, 57, 0.7); 
+}
